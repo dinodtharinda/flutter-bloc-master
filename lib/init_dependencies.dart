@@ -1,4 +1,3 @@
-import 'package:flutter_bloc_master/core/error/exception.dart';
 import 'package:flutter_bloc_master/core/secrets/app_secrets.dart';
 import 'package:flutter_bloc_master/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:flutter_bloc_master/features/auth/data/repositories/auth_repository_impl.dart';
