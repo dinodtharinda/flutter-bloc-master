@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_master/features/auth/domain/entities/user.dart';
 import 'package:flutter_bloc_master/features/auth/domain/usecases/user_sign_up.dart';
 
 part 'auth_event.dart';
@@ -13,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       : _userSignUp = userSignUp,
         super(AuthInitial()) {
     on<AuthSignUp>((event, emit) async {
+      emit(AuthLoading());
       final res = await _userSignUp(
         UserSignUpParams(
           email: event.email,
@@ -20,14 +22,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           name: event.name,
         ),
       );
-      print(res);
       res.fold(
-        (l) {
-          print(l.message);
-          emit(AuthFailure(l.message));
-          
-        }, //on error
-        (r) => emit(AuthSuccess(r)), // on success
+        (l) => emit(AuthFailure(l.message)), //on error                  F
+        (user) => emit(AuthSuccess(user)), // on success
       );
     });
   }
