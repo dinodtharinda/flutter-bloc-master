@@ -1,4 +1,4 @@
-import 'package:flutter_bloc_master/features/auth/domain/entities/user.dart';
+import 'package:flutter_bloc_master/core/common/entities/user.dart';
 
 class UserModel extends User {
   UserModel({

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc_master/core/error/exception.dart';
 import 'package:flutter_bloc_master/core/error/failures.dart';
 import 'package:flutter_bloc_master/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:flutter_bloc_master/features/auth/domain/entities/user.dart';
+import 'package:flutter_bloc_master/core/common/entities/user.dart';
 import 'package:flutter_bloc_master/features/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;

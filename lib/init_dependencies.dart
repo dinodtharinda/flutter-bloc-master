@@ -1,3 +1,4 @@
+import 'package:flutter_bloc_master/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:flutter_bloc_master/core/secrets/app_secrets.dart';
 import 'package:flutter_bloc_master/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:flutter_bloc_master/features/auth/data/repositories/auth_repository_impl.dart';
@@ -18,6 +19,9 @@ Future<void> initDependencies() async {
     anonKey: AppSecrets.supabaseAnnonkey,
   );
   serviceLocator.registerLazySingleton(() => supabase.client);
+
+  //core
+  serviceLocator.registerLazySingleton(() => AppUserCubit());
 }
 
 void _initAuth() {
@@ -57,6 +61,7 @@ void _initAuth() {
         userSignUp: serviceLocator(),
         userLogin: serviceLocator(),
         currentUser: serviceLocator(),
+        appUserCubit: serviceLocator()
       ),
     );
 }
