@@ -7,6 +7,11 @@ import 'package:flutter_bloc_master/features/auth/domain/usecases/current_user.d
 import 'package:flutter_bloc_master/features/auth/domain/usecases/user_login.dart';
 import 'package:flutter_bloc_master/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:flutter_bloc_master/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_bloc_master/features/blog/data/datasource/blog_remote_data_source.dart';
+import 'package:flutter_bloc_master/features/blog/data/repositories/blog_repository_impl.dart';
+import 'package:flutter_bloc_master/features/blog/domain/repository/blog_repository.dart';
+import 'package:flutter_bloc_master/features/blog/domain/usecases/upload_blog.dart';
+import 'package:flutter_bloc_master/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -14,6 +19,7 @@ final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   _initAuth();
+  _initBlog();
   final supabase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.supabaseAnnonkey,
@@ -58,10 +64,37 @@ void _initAuth() {
     //Bloc
     ..registerLazySingleton(
       () => AuthBloc(
-        userSignUp: serviceLocator(),
-        userLogin: serviceLocator(),
-        currentUser: serviceLocator(),
-        appUserCubit: serviceLocator()
+          userSignUp: serviceLocator(),
+          userLogin: serviceLocator(),
+          currentUser: serviceLocator(),
+          appUserCubit: serviceLocator()),
+    );
+}
+
+void _initBlog() {
+  serviceLocator
+  //Data Source
+    ..registerFactory<BlogRemoteDataSource>(
+      () => BlogRemoteDataSourceImpl(
+        serviceLocator(),
+      ),
+    )
+    //Repository
+    ..registerFactory<BlogRepository>(
+      () => BlogRepositoryImpl(
+        serviceLocator(),
+      ),
+    )
+    //Usecase
+    ..registerFactory(
+      () => UploadBlog(
+        serviceLocator(),
+      ),
+    )
+    //Bloc
+    ..registerLazySingleton(
+      () => BlogBloc(
+        uploadBlog: serviceLocator(),
       ),
     );
 }
