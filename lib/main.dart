@@ -4,6 +4,7 @@ import 'package:flutter_bloc_master/core/common/cubits/app_user/app_user_cubit.d
 import 'package:flutter_bloc_master/core/theme/theme.dart';
 import 'package:flutter_bloc_master/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_bloc_master/features/auth/presentation/pages/login_page.dart';
+import 'package:flutter_bloc_master/features/blog/presentation/pages/blog_page.dart';
 import 'package:flutter_bloc_master/init_dependencies.dart';
 
 void main() async {
@@ -44,9 +45,7 @@ class _MyAppState extends State<MyApp> {
         },
         builder: (context, isLoggedIn) {
           if (isLoggedIn) {
-            return const Scaffold(
-              body: Center(child: Text("Logged in!")),
-            );
+            return const BlocPage();
           } else {
             return const LoginPage();
           }
