@@ -40,6 +40,8 @@ class AuthRemoteDataSourceIml implements AuthRemoteDataSource {
       return UserModel.fromJson(
         response.user!.toJson(),
       );
+    } on AuthException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -63,6 +65,8 @@ class AuthRemoteDataSourceIml implements AuthRemoteDataSource {
       return UserModel.fromJson(
         response.user!.toJson(),
       );
+    } on AuthException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -76,7 +80,8 @@ class AuthRemoteDataSourceIml implements AuthRemoteDataSource {
               'id',
               currentUserSession!.user.id,
             );
-        return UserModel.fromJson(userData.first).copyWith(email: currentUserSession!.user.email);
+        return UserModel.fromJson(userData.first)
+            .copyWith(email: currentUserSession!.user.email);
       }
       return null;
     } catch (e) {
