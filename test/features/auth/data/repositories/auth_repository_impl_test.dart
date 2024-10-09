@@ -62,7 +62,7 @@ void main() {
         //arrange
         when(() => mockAuthRemoteDataSource.loginWithEmailPassword(
             email: tEmail,
-            password: 'wrongpassword')).thenThrow(const ServerException());
+            password: 'wrongpassword')).thenThrow( ServerException());
 
         //act
         final result = await authRepository.loginWithEmailPassword(
@@ -111,7 +111,7 @@ void main() {
         when(() => mockAuthRemoteDataSource.signUpWithEmailPassword(
             name: user.name,
             email: tEmail,
-            password: 'wrongpassword')).thenThrow(const ServerException());
+            password: 'wrongpassword')).thenThrow( ServerException());
 
         //act
         final result = await authRepository.signUpWithEmailPassword(
