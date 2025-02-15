@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Mock classes
 class MockSupabase extends Mock implements sb.Supabase {}
 
-class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
   late sb.Supabase supabase;
